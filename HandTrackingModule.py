@@ -1,4 +1,4 @@
-#import cv2
+import cv2
 import mediapipe as mp
 import time
 
@@ -22,9 +22,9 @@ class handDetector():
         self.mpDraw = mp.solutions.drawing_utils
 
     def findHands(self, img, draw=True):
-        #imgRGB = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)# converts from bgr to rgb
-        #self.results = self.hands.process(imgRGB)
-        self.results = self.hands.process(img)
+        imgRGB = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)# converts from bgr to rgb
+        self.results = self.hands.process(imgRGB)
+        #self.results = self.hands.process(img)
         # print(results.multi_hand_landmarks)
 
         #for checking if any hand detected or not using results.multi_hand_landmarks
@@ -46,7 +46,7 @@ class handDetector():
                 cx, cy = int(lm.x * w), int(lm.y * h)
                 # print(id, cx, cy)
                 lmList.append([id, cx, cy])
-                #if draw:
-                    #cv2.circle(img, (cx, cy), 15, (255, 0, 255), cv2.FILLED)
+                if draw:
+                    cv2.circle(img, (cx, cy), 15, (255, 0, 255), cv2.FILLED)
 
         return lmList
